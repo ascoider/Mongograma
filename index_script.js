@@ -4,7 +4,8 @@ const columnas = 12;
 const contenedor = document.getElementById("tablero-crucigrama");
 const textoDefinicionActiva = document.getElementById("texto-definicion-activa");
 
-contenedor.style.gridTemplateColumns = `repeat(${columnas}, 40px)`;
+contenedor.style.gridTemplateColumns = `repeat(${columnas}, var(--tamano-casilla))`;
+contenedor.style.gridTemplateRows = `repeat(${columnas}, var(--tamano-casilla))`;
 
 let direccionHorizontal = true;
 let ultimaCasillaActiva = null;
@@ -58,14 +59,66 @@ for (let f = 0; f < filas; f++) {
     });
 
     input.addEventListener("input", () => {
+      // Si el navegador introduce más de un carácter por velocidad, nos quedamos solo con el último
+      if (input.value.length > 1) {
+        input.value = input.value.slice(-1);
+      }
+
       if (input.value.length === 1) {
         ultimaCasillaActiva = null;
-        avanzarSiguienteCasilla(f, c);
+        
+        // Buscamos las coordenadas reales de esta casilla exacta en la matriz
+        let coordenadaActual = buscarCoordenadasCasilla(input);
+        if (coordenadaActual) {
+          avanzarSiguienteCasilla(coordenadaActual.f, coordenadaActual.c);
+        }
+      }
+    });
+
+    // Control de la tecla Backspace para ordenador y Android
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace') {
+        e.preventDefault(); 
+
+        if (input.value !== '') {
+          // Si la casilla actual tiene letra, la borramos
+          input.value = '';
+        } else {
+          // Si está vacía, retrocedemos a la anterior dentro de la palabra activa
+          const casillaAnterior = obtenerCasillaAnteriorEnPalabra(f, c);
+          
+          if (casillaAnterior) {
+            casillaAnterior.value = '';
+            casillaAnterior.focus();
+          }
+        }
       }
     });
 
     contenedor.appendChild(input);
   }
+}
+
+// Función para localizar la casilla anterior exacta dentro de la palabra activa
+function obtenerCasillaAnteriorEnPalabra(fActiva, cActiva) {
+  let f = fActiva;
+  let c = cActiva;
+
+  // Retrocedemos una posición según la dirección actual
+  if (direccionHorizontal) {
+    c--;
+  } else {
+    f--;
+  }
+
+  // Verificamos límites y si la casilla es válida y no bloqueada
+  if (f >= 0 && f < filas && c >= 0 && c < columnas) {
+    const casillaPrev = tablero[f][c];
+    if (!casillaPrev.classList.contains("bloqueada")) {
+      return casillaPrev;
+    }
+  }
+  return null;
 }
 
 function actualizarResaltadoYDefinicion(fActiva, cActiva) {
@@ -92,12 +145,10 @@ function mostrarDefinicionActiva(f, c) {
   let palabraEncontrada = null;
 
   if (direccionHorizontal) {
-    // Buscar la palabra horizontal a la que pertenece esta casilla
     palabraEncontrada = definicionesCargadas.find(p => 
       p.orientacion === 'horizontal' && p.fila === f && c >= p.col && c < p.col + p.longitud
     );
   } else {
-    // Buscar la palabra vertical a la que pertenece esta casilla
     palabraEncontrada = definicionesCargadas.find(p => 
       p.orientacion === 'vertical' && p.col === c && f >= p.fila && f < p.fila + p.longitud
     );
@@ -107,7 +158,7 @@ function mostrarDefinicionActiva(f, c) {
     const sentido = direccionHorizontal ? "Horizontal" : "Vertical";
     textoDefinicionActiva.innerHTML = `
       <div class="definicion-activa">
-        <strong>${palabraEncontrada.id} (${sentido} - ${palabraEncontrada.longitud} letras):</strong><br>
+        <strong>${palabraEncontrada.id} (${sentido} ${palabraEncontrada.longitud} letras):</strong><br>
         ${palabraEncontrada.textoDefinicion}
       </div>
     `;
@@ -116,40 +167,60 @@ function mostrarDefinicionActiva(f, c) {
   }
 }
 
-function avanzarSiguienteCasilla(f, c) {
-  let sigFila = f;
-  let sigCol = c;
-
-  while (true) {
-    if (direccionHorizontal) {
-      sigCol++;
-      if (sigCol >= columnas) {
-        sigCol = 0;
-        sigFila++;
-      }
-    } else {
-      sigFila++;
-      if (sigFila >= filas) {
-        sigFila = 0;
-        sigCol++;
+// Función auxiliar para encontrar las coordenadas [f, c] de un input concreto de forma segura
+function buscarCoordenadasCasilla(inputBuscado) {
+  for (let f = 0; f < filas; f++) {
+    for (let c = 0; c < columnas; c++) {
+      if (tablero[f][c] === inputBuscado) {
+        return { f, c };
       }
     }
+  }
+  return null;
+}
 
-    if (sigFila >= filas || sigCol >= columnas) break;
+function avanzarSiguienteCasilla(fActiva, cActiva) {
+  let palabraEncontrada = null;
 
-    const siguienteInput = tablero[sigFila][sigCol];
+  // 1. Identificar la palabra activa actual según la dirección
+  if (direccionHorizontal) {
+    palabraEncontrada = definicionesCargadas.find(p => 
+      p.orientacion === 'horizontal' && p.fila === fActiva && cActiva >= p.col && cActiva < p.col + p.longitud
+    );
+  } else {
+    palabraEncontrada = definicionesCargadas.find(p => 
+      p.orientacion === 'vertical' && p.col === cActiva && fActiva >= p.fila && fActiva < p.fila + p.longitud
+    );
+  }
+
+  if (!palabraEncontrada) return;
+
+  // 2. Construir la lista ordenada de casillas de esta palabra
+  let celdasDePalabra = [];
+  for (let i = 0; i < palabraEncontrada.longitud; i++) {
+    let rf = palabraEncontrada.orientacion === 'horizontal' ? palabraEncontrada.fila : palabraEncontrada.fila + i;
+    let rc = palabraEncontrada.orientacion === 'horizontal' ? palabraEncontrada.col + i : palabraEncontrada.col;
+    celdasDePalabra.push({ f: rf, c: rc });
+  }
+
+  // 3. Encontrar nuestra posición actual dentro de la palabra
+  let indexActual = celdasDePalabra.findIndex(celda => celda.f === fActiva && celda.c === cActiva);
+
+  // 4. Si hay una casilla siguiente en la misma palabra, saltar a ella de forma limpia
+  if (indexActual !== -1 && indexActual + 1 < celdasDePalabra.length) {
+    let siguiente = celdasDePalabra[indexActual + 1];
+    let siguienteInput = tablero[siguiente.f][siguiente.c];
+    
     if (!siguienteInput.classList.contains("bloqueada")) {
       siguienteInput.focus();
-      actualizarResaltadoYDefinicion(sigFila, sigCol);
-      break;
+      actualizarResaltadoYDefinicion(siguiente.f, siguiente.c);
     }
   }
 }
 
 // 2. Cargar automáticamente el archivo JSON del crucigrama desde el servidor
 function cargarCrucigramaInicial() {
-  // Hacemos una petición fetch al archivo .json físico en la web
-  fetch("solutions/crucigrama001.json") // Ajusta la ruta si la carpeta tiene otro nombre exacto
+  fetch("solutions/crucigrama001.json")
     .then(response => {
       if (!response.ok) {
         throw new Error("No se pudo cargar el archivo del crucigrama.");

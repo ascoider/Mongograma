@@ -96,7 +96,14 @@ button {
 }
 
 :root {
-  --tamano-casilla: 42px; /* Súbelo a 45px o 48px si lo quieres más grande de base */
+  --tamano-casilla: 48px; /* Súbelo a 45px o 48px si lo quieres más grande de base */
+}
+
+/* Tamaño automático más grande cuando se ve en móviles (pantallas menores de 600px) */
+@media (max-width: 600px) {
+  :root {
+    --tamano-casilla: 24px; /* Súbelo a 48px o 50px si lo quieres aún más grande y fácil de pulsar en el móvil */
+  }
 }
 
 #tablero-crucigrama {
@@ -113,6 +120,7 @@ button {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1; /* Garantiza matemáticamente que sea un cuadrado perfecto */
   background-color: #ffffff;
   border: none; /* Sin bordes propios para evitar que desaparezcan */
   margin: 0;
