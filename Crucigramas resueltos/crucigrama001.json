@@ -1,0 +1,1132 @@
+{
+  "tablero": [
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "p",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "j",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "x",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "b",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "z",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "l",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "g",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "m",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "b",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "m",
+      "bloqueada": false
+    },
+    {
+      "letra": "p",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "u",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "u",
+      "bloqueada": false
+    },
+    {
+      "letra": "m",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "u",
+      "bloqueada": false
+    },
+    {
+      "letra": "l",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "r",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "p",
+      "bloqueada": false
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "b",
+      "bloqueada": false
+    },
+    {
+      "letra": "l",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "u",
+      "bloqueada": false
+    },
+    {
+      "letra": "s",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "t",
+      "bloqueada": false
+    },
+    {
+      "letra": "e",
+      "bloqueada": false
+    },
+    {
+      "letra": "m",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "d",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "v",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "n",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    },
+    {
+      "letra": "l",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "g",
+      "bloqueada": false
+    },
+    {
+      "letra": "i",
+      "bloqueada": false
+    },
+    {
+      "letra": "c",
+      "bloqueada": false
+    },
+    {
+      "letra": "o",
+      "bloqueada": false
+    },
+    {
+      "letra": "",
+      "bloqueada": true
+    },
+    {
+      "letra": "u",
+      "bloqueada": false
+    },
+    {
+      "letra": "a",
+      "bloqueada": false
+    }
+  ],
+  "definiciones": [
+    {
+      "id": "H1",
+      "orientacion": "horizontal",
+      "num": 1,
+      "fila": 0,
+      "col": 0,
+      "longitud": 6,
+      "solucion": "tapado",
+      "textoDefinicion": "h1"
+    },
+    {
+      "id": "H2",
+      "orientacion": "horizontal",
+      "num": 2,
+      "fila": 0,
+      "col": 7,
+      "longitud": 5,
+      "solucion": "sarta",
+      "textoDefinicion": "h2"
+    },
+    {
+      "id": "H3",
+      "orientacion": "horizontal",
+      "num": 3,
+      "fila": 1,
+      "col": 0,
+      "longitud": 9,
+      "solucion": "anteojera",
+      "textoDefinicion": "h3"
+    },
+    {
+      "id": "H4",
+      "orientacion": "horizontal",
+      "num": 4,
+      "fila": 1,
+      "col": 10,
+      "longitud": 1,
+      "solucion": "r",
+      "textoDefinicion": "h4"
+    },
+    {
+      "id": "H5",
+      "orientacion": "horizontal",
+      "num": 5,
+      "fila": 2,
+      "col": 0,
+      "longitud": 2,
+      "solucion": "xi",
+      "textoDefinicion": "h5"
+    },
+    {
+      "id": "H6",
+      "orientacion": "horizontal",
+      "num": 6,
+      "fila": 2,
+      "col": 3,
+      "longitud": 3,
+      "solucion": "rbe",
+      "textoDefinicion": "h6"
+    },
+    {
+      "id": "H7",
+      "orientacion": "horizontal",
+      "num": 7,
+      "fila": 2,
+      "col": 7,
+      "longitud": 5,
+      "solucion": "tazad",
+      "textoDefinicion": "h7"
+    },
+    {
+      "id": "H8",
+      "orientacion": "horizontal",
+      "num": 8,
+      "fila": 3,
+      "col": 0,
+      "longitud": 8,
+      "solucion": "icnologa",
+      "textoDefinicion": "h8"
+    },
+    {
+      "id": "H9",
+      "orientacion": "horizontal",
+      "num": 9,
+      "fila": 3,
+      "col": 9,
+      "longitud": 3,
+      "solucion": "aci",
+      "textoDefinicion": "h9"
+    },
+    {
+      "id": "H10",
+      "orientacion": "horizontal",
+      "num": 10,
+      "fila": 4,
+      "col": 0,
+      "longitud": 7,
+      "solucion": "desease",
+      "textoDefinicion": "h10"
+    },
+    {
+      "id": "H11",
+      "orientacion": "horizontal",
+      "num": 11,
+      "fila": 4,
+      "col": 8,
+      "longitud": 4,
+      "solucion": "omis",
+      "textoDefinicion": "h11"
+    },
+    {
+      "id": "H12",
+      "orientacion": "horizontal",
+      "num": 12,
+      "fila": 5,
+      "col": 0,
+      "longitud": 2,
+      "solucion": "et",
+      "textoDefinicion": "h12"
+    },
+    {
+      "id": "H13",
+      "orientacion": "horizontal",
+      "num": 13,
+      "fila": 5,
+      "col": 3,
+      "longitud": 2,
+      "solucion": "ss",
+      "textoDefinicion": "h13"
+    },
+    {
+      "id": "H14",
+      "orientacion": "horizontal",
+      "num": 14,
+      "fila": 5,
+      "col": 6,
+      "longitud": 6,
+      "solucion": "rarboc",
+      "textoDefinicion": "h14"
+    },
+    {
+      "id": "H15",
+      "orientacion": "horizontal",
+      "num": 15,
+      "fila": 6,
+      "col": 0,
+      "longitud": 8,
+      "solucion": "rompedor",
+      "textoDefinicion": "h15"
+    },
+    {
+      "id": "H16",
+      "orientacion": "horizontal",
+      "num": 16,
+      "fila": 6,
+      "col": 9,
+      "longitud": 1,
+      "solucion": "u",
+      "textoDefinicion": "h16"
+    },
+    {
+      "id": "H17",
+      "orientacion": "horizontal",
+      "num": 17,
+      "fila": 6,
+      "col": 11,
+      "longitud": 1,
+      "solucion": "u",
+      "textoDefinicion": "h17"
+    },
+    {
+      "id": "H18",
+      "orientacion": "horizontal",
+      "num": 18,
+      "fila": 7,
+      "col": 0,
+      "longitud": 1,
+      "solucion": "m",
+      "textoDefinicion": "h18"
+    },
+    {
+      "id": "H19",
+      "orientacion": "horizontal",
+      "num": 19,
+      "fila": 7,
+      "col": 2,
+      "longitud": 2,
+      "solucion": "ia",
+      "textoDefinicion": "h19"
+    },
+    {
+      "id": "H20",
+      "orientacion": "horizontal",
+      "num": 20,
+      "fila": 7,
+      "col": 5,
+      "longitud": 7,
+      "solucion": "ondular",
+      "textoDefinicion": "h20"
+    },
+    {
+      "id": "H21",
+      "orientacion": "horizontal",
+      "num": 21,
+      "fila": 8,
+      "col": 0,
+      "longitud": 12,
+      "solucion": "inaceptables",
+      "textoDefinicion": "h21"
+    },
+    {
+      "id": "H22",
+      "orientacion": "horizontal",
+      "num": 22,
+      "fila": 9,
+      "col": 0,
+      "longitud": 7,
+      "solucion": "susidio",
+      "textoDefinicion": "h22"
+    },
+    {
+      "id": "H23",
+      "orientacion": "horizontal",
+      "num": 23,
+      "fila": 9,
+      "col": 8,
+      "longitud": 4,
+      "solucion": "iiii",
+      "textoDefinicion": "h23"
+    },
+    {
+      "id": "H24",
+      "orientacion": "horizontal",
+      "num": 24,
+      "fila": 10,
+      "col": 0,
+      "longitud": 4,
+      "solucion": "tema",
+      "textoDefinicion": "h24"
+    },
+    {
+      "id": "H25",
+      "orientacion": "horizontal",
+      "num": 25,
+      "fila": 10,
+      "col": 5,
+      "longitud": 1,
+      "solucion": "n",
+      "textoDefinicion": "h25"
+    },
+    {
+      "id": "H26",
+      "orientacion": "horizontal",
+      "num": 26,
+      "fila": 10,
+      "col": 7,
+      "longitud": 5,
+      "solucion": "acdov",
+      "textoDefinicion": "h26"
+    },
+    {
+      "id": "H27",
+      "orientacion": "horizontal",
+      "num": 27,
+      "fila": 11,
+      "col": 0,
+      "longitud": 9,
+      "solucion": "analogico",
+      "textoDefinicion": "h27"
+    },
+    {
+      "id": "H28",
+      "orientacion": "horizontal",
+      "num": 28,
+      "fila": 11,
+      "col": 10,
+      "longitud": 2,
+      "solucion": "ua",
+      "textoDefinicion": "h28"
+    },
+    {
+      "id": "V1",
+      "orientacion": "vertical",
+      "num": 1,
+      "fila": 0,
+      "col": 0,
+      "longitud": 12,
+      "solucion": "taxidermista",
+      "textoDefinicion": "v1"
+    },
+    {
+      "id": "V2",
+      "orientacion": "vertical",
+      "num": 2,
+      "fila": 0,
+      "col": 1,
+      "longitud": 7,
+      "solucion": "aniceto",
+      "textoDefinicion": "v2"
+    },
+    {
+      "id": "V3",
+      "orientacion": "vertical",
+      "num": 3,
+      "fila": 8,
+      "col": 1,
+      "longitud": 4,
+      "solucion": "nuen",
+      "textoDefinicion": "v3"
+    },
+    {
+      "id": "V4",
+      "orientacion": "vertical",
+      "num": 4,
+      "fila": 0,
+      "col": 2,
+      "longitud": 2,
+      "solucion": "pt",
+      "textoDefinicion": "v4"
+    },
+    {
+      "id": "V5",
+      "orientacion": "vertical",
+      "num": 5,
+      "fila": 3,
+      "col": 2,
+      "longitud": 2,
+      "solucion": "ns",
+      "textoDefinicion": "v5"
+    },
+    {
+      "id": "V6",
+      "orientacion": "vertical",
+      "num": 6,
+      "fila": 6,
+      "col": 2,
+      "longitud": 6,
+      "solucion": "miasma",
+      "textoDefinicion": "v6"
+    },
+    {
+      "id": "V7",
+      "orientacion": "vertical",
+      "num": 7,
+      "fila": 0,
+      "col": 3,
+      "longitud": 12,
+      "solucion": "aeroespacial",
+      "textoDefinicion": "v7"
+    },
+    {
+      "id": "V8",
+      "orientacion": "vertical",
+      "num": 8,
+      "fila": 0,
+      "col": 4,
+      "longitud": 7,
+      "solucion": "doblase",
+      "textoDefinicion": "v8"
+    },
+    {
+      "id": "V9",
+      "orientacion": "vertical",
+      "num": 9,
+      "fila": 8,
+      "col": 4,
+      "longitud": 2,
+      "solucion": "ed",
+      "textoDefinicion": "v9"
+    },
+    {
+      "id": "V10",
+      "orientacion": "vertical",
+      "num": 10,
+      "fila": 11,
+      "col": 4,
+      "longitud": 1,
+      "solucion": "o",
+      "textoDefinicion": "v10"
+    },
+    {
+      "id": "V11",
+      "orientacion": "vertical",
+      "num": 11,
+      "fila": 0,
+      "col": 5,
+      "longitud": 5,
+      "solucion": "ojeos",
+      "textoDefinicion": "v11"
+    },
+    {
+      "id": "V12",
+      "orientacion": "vertical",
+      "num": 12,
+      "fila": 6,
+      "col": 5,
+      "longitud": 6,
+      "solucion": "doping",
+      "textoDefinicion": "v12"
+    },
+    {
+      "id": "V13",
+      "orientacion": "vertical",
+      "num": 13,
+      "fila": 1,
+      "col": 6,
+      "longitud": 1,
+      "solucion": "e",
+      "textoDefinicion": "v13"
+    },
+    {
+      "id": "V14",
+      "orientacion": "vertical",
+      "num": 14,
+      "fila": 3,
+      "col": 6,
+      "longitud": 7,
+      "solucion": "geronto",
+      "textoDefinicion": "v14"
+    },
+    {
+      "id": "V15",
+      "orientacion": "vertical",
+      "num": 15,
+      "fila": 11,
+      "col": 6,
+      "longitud": 1,
+      "solucion": "i",
+      "textoDefinicion": "v15"
+    },
+    {
+      "id": "V16",
+      "orientacion": "vertical",
+      "num": 16,
+      "fila": 0,
+      "col": 7,
+      "longitud": 4,
+      "solucion": "srta",
+      "textoDefinicion": "v16"
+    },
+    {
+      "id": "V17",
+      "orientacion": "vertical",
+      "num": 17,
+      "fila": 5,
+      "col": 7,
+      "longitud": 4,
+      "solucion": "arda",
+      "textoDefinicion": "v17"
+    },
+    {
+      "id": "V18",
+      "orientacion": "vertical",
+      "num": 18,
+      "fila": 10,
+      "col": 7,
+      "longitud": 2,
+      "solucion": "ac",
+      "textoDefinicion": "v18"
+    },
+    {
+      "id": "V19",
+      "orientacion": "vertical",
+      "num": 19,
+      "fila": 0,
+      "col": 8,
+      "longitud": 3,
+      "solucion": "aaa",
+      "textoDefinicion": "v19"
+    },
+    {
+      "id": "V20",
+      "orientacion": "vertical",
+      "num": 20,
+      "fila": 4,
+      "col": 8,
+      "longitud": 2,
+      "solucion": "or",
+      "textoDefinicion": "v20"
+    },
+    {
+      "id": "V21",
+      "orientacion": "vertical",
+      "num": 21,
+      "fila": 7,
+      "col": 8,
+      "longitud": 5,
+      "solucion": "ubico",
+      "textoDefinicion": "v21"
+    },
+    {
+      "id": "V22",
+      "orientacion": "vertical",
+      "num": 22,
+      "fila": 0,
+      "col": 9,
+      "longitud": 1,
+      "solucion": "r",
+      "textoDefinicion": "v22"
+    },
+    {
+      "id": "V23",
+      "orientacion": "vertical",
+      "num": 23,
+      "fila": 2,
+      "col": 9,
+      "longitud": 9,
+      "solucion": "zambullid",
+      "textoDefinicion": "v23"
+    },
+    {
+      "id": "V24",
+      "orientacion": "vertical",
+      "num": 24,
+      "fila": 0,
+      "col": 10,
+      "longitud": 6,
+      "solucion": "tracio",
+      "textoDefinicion": "v24"
+    },
+    {
+      "id": "V25",
+      "orientacion": "vertical",
+      "num": 25,
+      "fila": 7,
+      "col": 10,
+      "longitud": 5,
+      "solucion": "aeiou",
+      "textoDefinicion": "v25"
+    },
+    {
+      "id": "V26",
+      "orientacion": "vertical",
+      "num": 26,
+      "fila": 0,
+      "col": 11,
+      "longitud": 1,
+      "solucion": "a",
+      "textoDefinicion": "v26"
+    },
+    {
+      "id": "V27",
+      "orientacion": "vertical",
+      "num": 27,
+      "fila": 2,
+      "col": 11,
+      "longitud": 10,
+      "solucion": "discursiva",
+      "textoDefinicion": "v27"
+    }
+  ]
+}

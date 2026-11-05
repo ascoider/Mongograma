@@ -1,0 +1,172 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 20px;
+}
+
+#panel-guardado {
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+#btn-guardar {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#btn-guardar:hover {
+  background-color: #45a049;
+}
+
+#btn-abrir-gestion {
+  background-color: #2196F3;
+  color: white;
+}
+
+#btn-abrir-gestion:hover {
+  background-color: #0b7dda;
+}
+
+#select-guardados {
+  padding: 7px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  margin-right: 5px;
+}
+
+/* Modal de gestión */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  width: 350px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.item-gestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-gestion span {
+  font-weight: bold;
+}
+
+.item-gestion button {
+  padding: 4px 8px;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+#btn-cerrar-gestion {
+  margin-top: 15px;
+  background-color: #f44336;
+  color: white;
+  width: 100%;
+}
+
+#tablero-crucigrama {
+  display: inline-grid;
+  grid-template-columns: repeat(12, 40px);
+  border: 3px solid #000000;
+  background-color: #000000;
+  margin-top: 10px;
+}
+
+.casilla {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid #333333;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  caret-color: transparent; 
+}
+
+.casilla::selection {
+  background-color: transparent;
+  color: inherit;
+}
+
+.casilla.en-linea {
+  background-color: #fff2b2;
+}
+
+.casilla:focus {
+  background-color: #ffcc00;
+}
+
+.casilla.bloqueada {
+  background-color: #222222;
+  border-color: #222222;
+}
+
+#contenedor-definiciones {
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+  text-align: left;
+  background: white;
+  padding: 15px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.columnas-definiciones {
+  display: flex;
+  gap: 20px;
+}
+
+.columnas-definiciones > div {
+  flex: 1;
+}
+
+.item-definicion {
+  margin-bottom: 10px;
+}
+
+.item-definicion label {
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.item-definicion input {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
