@@ -101,7 +101,7 @@ button {
 
 @media (max-width: 600px) {
   :root {
-    --tamano-casilla: 32px;
+    --tamano-casilla: 24px;
   }
 }
 
@@ -228,4 +228,9 @@ button {
   /* border-left: 4px solid #fab005; */
   padding-left: 10px;
   font-weight: normal;
+}
+
+/* Asegurar espacio extra al final de la página para que el móvil pueda hacer scroll al escribir abajo */
+body {
+  padding-bottom: 250px !important; /* Deja hueco artificial para que el teclado no tape el contenido */
 }

@@ -41,7 +41,7 @@ if (contenedorMarco) {
 
       const input = document.createElement("input");
       input.type = "text";
-      input.setAttribute("inputmode", "text");
+      input.setAttribute("inputmode", "latin"); // O "text" limpio sin barra de números extra
       input.setAttribute("autocomplete", "off");
       input.setAttribute("autocorrect", "off");
       input.setAttribute("autocapitalize", "characters");
@@ -73,6 +73,7 @@ if (contenedorMarco) {
       input.addEventListener("focus", () => {
         if (input.classList.contains("bloqueada")) {
           input.blur();
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
           limpiarSeleccionYDefinicion();
           return;
         }
