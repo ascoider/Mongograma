@@ -145,7 +145,7 @@ function avanzarSiguienteCasilla(f, c) {
 // 2. Cargar automáticamente el archivo JSON del crucigrama desde el servidor
 function cargarCrucigramaInicial() {
   // Hacemos una petición fetch al archivo .json físico en la web
-  fetch("Crucigramas resueltos/crucigrama001.json") // Ajusta la ruta si la carpeta tiene otro nombre exacto
+  fetch("solutions/crucigrama001.json") // Ajusta la ruta si la carpeta tiene otro nombre exacto
     .then(response => {
       if (!response.ok) {
         throw new Error("No se pudo cargar el archivo del crucigrama.");
