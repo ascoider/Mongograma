@@ -96,33 +96,72 @@ button {
 }
 
 :root {
-  --tamano-casilla: 48px; /* Súbelo a 45px o 48px si lo quieres más grande de base */
+  --tamano-casilla: 48px;
 }
 
-/* Tamaño automático más grande cuando se ve en móviles (pantallas menores de 600px) */
 @media (max-width: 600px) {
   :root {
-    --tamano-casilla: 24px; /* Súbelo a 48px o 50px si lo quieres aún más grande y fácil de pulsar en el móvil */
+    --tamano-casilla: 32px;
   }
 }
 
-#tablero-crucigrama {
+/* Contenedor principal que organiza el grid de números y tablero por separado */
+.crucigrama-marco-externo {
   display: inline-grid;
-  grid-template-columns: repeat(12, var(--tamano-casilla));
-  grid-template-rows: repeat(12, var(--tamano-casilla));
-  background-color: #000000; /* Este fondo negro actúa como las líneas de la cuadrícula */
-  border: 4px solid #000000;
-  gap: 2px; /* Líneas perfectamente uniformes de 1px en horizontal y vertical */
+  grid-template-columns: var(--tamano-casilla) repeat(12, var(--tamano-casilla));
+  grid-template-rows: var(--tamano-casilla) repeat(12, var(--tamano-casilla));
+  background-color: transparent;
+  gap: 0; /* Sin espacios generales para evitar líneas extrañas */
   margin-top: 10px;
+}
+
+.esquina-vacia {
+  background-color: transparent;
+}
+
+/* Contenedor para los números de arriba */
+.referencias-fila {
+  display: contents;
+}
+
+/* Contenedor para los números de la izquierda */
+.referencias-columna {
+  display: contents;
+}
+
+/* Estilo de los números de referencia (flotantes, sin líneas ni recuadros) */
+.referencia-borde {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--tamano-casilla) * 0.45);
+  font-weight: bold;
+  color: #333333;
+  background-color: transparent;
+}
+
+/* El tablero interno dibuja sus líneas únicamente en la zona de juego */
+.tablero-interno {
+  display: contents;
+}
+
+/* Las celdas del tablero usan un fondo negro en el contenedor o bordes individuales para las líneas */
+.celda-contenedor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #000000; /* Esto crea las líneas negras de separación solo entre casillas */
+  padding: 1px; /* Grosor de la línea del tablero */
+  box-sizing: border-box;
 }
 
 .casilla {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  aspect-ratio: 1 / 1; /* Garantiza matemáticamente que sea un cuadrado perfecto */
+  aspect-ratio: 1 / 1;
   background-color: #ffffff;
-  border: none; /* Sin bordes propios para evitar que desaparezcan */
+  border: none;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -158,30 +197,4 @@ button {
   padding: 15px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.columnas-definiciones {
-  display: flex;
-  gap: 20px;
-}
-
-.columnas-definiciones > div {
-  flex: 1;
-}
-
-.item-definicion {
-  margin-bottom: 10px;
-}
-
-.item-definicion label {
-  font-size: 12px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 3px;
-}
-
-.item-definicion input {
-  width: 100%;
-  padding: 5px;
-  box-sizing: border-box;
 }

@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Resolver Crucigrama 001</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Estilo específico para destacar la definición activa del jugador */
-    .definicion-activa {
-      background-color: #fff2b2;
-      padding: 10px;
-      border-left: 4px solid #ffcc00;
-      font-weight: bold;
-      margin-top: 10px;
-      border-radius: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Resolver Crucigrama 001</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* Estilo específico para destacar la definición activa del jugador */
+      .definicion-activa {
+        background-color: #fff2b2;
+        padding: 10px;
+        border-left: 4px solid #ffcc00;
+        font-weight: bold;
+        margin-top: 10px;
+        border-radius: 4px;
+      }
+    </style>
 </head>
 <body>
-  <h1>Crucigrama 001</h1>
 
-  <!-- Tablero del jugador -->
-  <div id="tablero-crucigrama"></div>
+    <h1>Crucigrama 001</h1>
 
-  <!-- Panel donde se muestra exclusivamente la definición de la palabra seleccionada -->
-  <div id="contenedor-definicion-activa" style="max-width: 500px; margin: 20px auto; text-align: left; background: white; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
-    <h3>Definición actual</h3>
-    <div id="texto-definicion-activa">Haz clic en una casilla para ver su definición.</div>
-  </div>
+    <!-- Contenedor principal con marcos separados para números y tablero -->
+    <div id="contenedor-marco" class="crucigrama-marco-externo"></div>
 
-  <script src="index_script.js"></script>
+    <!-- Panel donde se muestra exclusivamente la definición de la palabra seleccionada -->
+    <div id="contenedor-definicion-activa" style="max-width: 500px; margin: 20px auto; text-align: left; background: white; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+        <h3>Definición actual</h3>
+        <div id="texto-definicion-activa">Haz clic en una casilla para ver su definición.</div>
+    </div>
+
+    <!-- Archivo JavaScript al final -->
+    <script src="index_script.js"></script>
 </body>
 </html>
