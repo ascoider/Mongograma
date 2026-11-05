@@ -142,34 +142,41 @@ function avanzarSiguienteCasilla(f, c) {
   }
 }
 
-// 2. Cargar automáticamente el "crucigrama001" al abrir la página
+// 2. Cargar automáticamente el archivo JSON del crucigrama desde el servidor
 function cargarCrucigramaInicial() {
-  const datosGuardados = JSON.parse(localStorage.getItem("crucigrama001"));
-  
-  if (!datosGuardados) {
-    alert("No se encontró el 'crucigrama001' guardado. Por favor, guárdalo primero desde el panel del creador.");
-    return;
-  }
-
-  let index = 0;
-  for (let f = 0; f < filas; f++) {
-    for (let c = 0; c < columnas; c++) {
-      const celdaDatos = datosGuardados.tablero[index];
-      const input = tablero[f][c];
-
-      input.value = ""; // Ocultar la solución al jugador
-      if (celdaDatos.bloqueada) {
-        input.classList.add("bloqueada");
-        input.readOnly = true;
-      } else {
-        input.classList.remove("bloqueada");
-        input.readOnly = false;
+  // Hacemos una petición fetch al archivo .json físico en la web
+  fetch("Crucigramas resueltos/crucigrama001.json") // Ajusta la ruta si la carpeta tiene otro nombre exacto
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No se pudo cargar el archivo del crucigrama.");
       }
-      index++;
-    }
-  }
+      return response.json();
+    })
+    .then(datosGuardados => {
+      let index = 0;
+      for (let f = 0; f < filas; f++) {
+        for (let c = 0; c < columnas; c++) {
+          const celdaDatos = datosGuardados.tablero[index];
+          const input = tablero[f][c];
 
-  definicionesCargadas = datosGuardados.definiciones || [];
+          input.value = ""; // Ocultar la solución al jugador
+          if (celdaDatos.bloqueada) {
+            input.classList.add("bloqueada");
+            input.readOnly = true;
+          } else {
+            input.classList.remove("bloqueada");
+            input.readOnly = false;
+          }
+          index++;
+        }
+      }
+
+      definicionesCargadas = datosGuardados.definiciones || [];
+    })
+    .catch(error => {
+      console.error("Error al cargar el crucigrama:", error);
+      alert("Hubo un error al cargar el crucigrama inicial. Comprueba la ruta del archivo JSON.");
+    });
 }
 
 // Inicializar
