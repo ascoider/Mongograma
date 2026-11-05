@@ -1,14 +1,12 @@
 const filas = 12;
 const columnas = 12;
-
-// Usamos el contenedor unificado del Código 1
-const contenedorMarco = document.getElementById("contenedor-marco"); 
+const contenedorMarco = document.getElementById("contenedor-marco");
 const textoDefinicionActiva = document.getElementById("texto-definicion-activa");
 
 let direccionHorizontal = true;
 let ultimaCasillaActiva = null;
 let definicionesCargadas = [];
-const tablero = []; // Matriz bidimensional lógica para el juego
+const tablero = [];
 
 // Limpiar el contenedor por seguridad al iniciar
 if (contenedorMarco) {
@@ -50,7 +48,7 @@ if (contenedorMarco) {
       input.maxLength = 1;
       input.classList.add("casilla");
       
-      tablero[f][c] = input; // Guardamos el input en la matriz lógica
+      tablero[f][c] = input;
       contenedorCelda.appendChild(input);
 
       const seleccionarTexto = () => {
@@ -69,16 +67,17 @@ if (contenedorMarco) {
         }
 
         seleccionarTexto();
-        mostrarDefinicionActiva(f, c);
+        actualizarResaltadoYDefinicion(f, c);
       });
 
       input.addEventListener("focus", () => {
         if (input.classList.contains("bloqueada")) {
           input.blur();
+          limpiarSeleccionYDefinicion();
           return;
         }
         seleccionarTexto();
-        mostrarDefinicionActiva(f, c);
+        actualizarResaltadoYDefinicion(f, c);
       });
 
       input.addEventListener("input", () => {
@@ -109,8 +108,39 @@ if (contenedorMarco) {
   }
 }
 
-// Función para mostrar la definición activa
-function mostrarDefinicionActiva(f, c) {
+// Limpiar resaltados y dejar el recuadro de definición completamente vacío
+function limpiarSeleccionYDefinicion() {
+  for (let f = 0; f < filas; f++) {
+    for (let c = 0; c < columnas; c++) {
+      const inp = tablero[f][c];
+      if (inp) {
+        inp.classList.remove("celda-resaltada", "celda-activa-palabra");
+      }
+    }
+  }
+  if (textoDefinicionActiva) {
+    textoDefinicionActiva.innerHTML = "";
+  }
+}
+
+// Detectar clics fuera del crucigrama para limpiar el cuadro de definición
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("casilla") && !e.target.classList.contains("referencia-borde")) {
+    limpiarSeleccionYDefinicion();
+    ultimaCasillaActiva = null;
+  }
+});
+
+// Actualizar resaltado de palabra y mostrar definición limpia
+function actualizarResaltadoYDefinicion(f, c) {
+  // Limpiar resaltados previos
+  for (let row = 0; row < filas; row++) {
+    for (let col = 0; col < columnas; col++) {
+      const inp = tablero[row][col];
+      if (inp) inp.classList.remove("celda-resaltada", "celda-activa-palabra");
+    }
+  }
+
   let palabraEncontrada = null;
 
   if (direccionHorizontal) {
@@ -123,16 +153,34 @@ function mostrarDefinicionActiva(f, c) {
     );
   }
 
+  // Resaltar las casillas de la palabra encontrada
+  if (palabraEncontrada) {
+    for (let i = 0; i < palabraEncontrada.longitud; i++) {
+      let rf = palabraEncontrada.orientacion === 'horizontal' ? palabraEncontrada.fila : palabraEncontrada.fila + i;
+      let rc = palabraEncontrada.orientacion === 'horizontal' ? palabraEncontrada.col + i : palabraEncontrada.col;
+      
+      const celdaPalabra = tablero[rf][rc];
+      if (celdaPalabra) {
+        if (rf === f && rc === c) {
+          celdaPalabra.classList.add("celda-activa-palabra");
+        } else {
+          celdaPalabra.classList.add("celda-resaltada");
+        }
+      }
+    }
+  }
+
+  // Mostrar la definición con el formato limpio solicitado ("1 - Horizontal")
   if (palabraEncontrada && textoDefinicionActiva) {
     const sentido = direccionHorizontal ? "Horizontal" : "Vertical";
     textoDefinicionActiva.innerHTML = `
       <div class="definicion-activa">
-        <strong>${palabraEncontrada.id} (${sentido} - ${palabraEncontrada.longitud} letras):</strong><br>
+        <strong>${palabraEncontrada.num} - ${sentido}</strong><br>
         ${palabraEncontrada.textoDefinicion}
       </div>
     `;
   } else if (textoDefinicionActiva) {
-    textoDefinicionActiva.textContent = "Haz clic en una casilla para ver su definición.";
+    textoDefinicionActiva.innerHTML = "";
   }
 }
 
@@ -173,7 +221,7 @@ function cargarCrucigramaInicial() {
         throw new Error("El archivo JSON no tiene la propiedad 'tablero'.");
       }
 
-      let index = 0; // Índice plano para recorrer los 144 elementos del JSON[cite: 4]
+      let index = 0;
       for (let f = 0; f < filas; f++) {
         for (let c = 0; c < columnas; c++) {
           const celdaDatos = datosGuardados.tablero[index];

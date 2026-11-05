@@ -185,16 +185,47 @@ button {
   background-color: #ffcc00;
 }
 
+/* Estilos para el resaltado suave de la palabra completa */
+.celda-resaltada {
+  background-color: #f0f8ff !important; /* Tono suave menos saturado para el resto de la palabra */
+}
+
+.celda-activa-palabra {
+  background-color: #d0ebff !important; /* Casilla actual dentro de la palabra seleccionada */
+}
+
 .casilla.bloqueada {
   background-color: #000000;
 }
 
-#contenedor-definiciones {
-  max-width: 600px;
+/* Panel de definiciones ajustado exactamente al ancho del crucigrama (13 columnas * tamaño) */
+#contenedor-definiciones,
+#texto-definicion-activa {
+  width: calc(var(--tamano-casilla) * 13);
+  max-width: 100%;
   margin: 20px auto 0 auto;
   text-align: left;
   background: white;
   padding: 15px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#contenedor-definicion-activa {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.definicion-activa {
+  background: white;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background-color: rgb(255, 246, 175);
+  /* border-left: 4px solid #fab005; */
+  padding-left: 10px;
+  font-weight: normal;
 }
