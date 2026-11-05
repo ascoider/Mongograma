@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Crucigrama</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Crucigrama Semanal</h1>
+
+  <!-- Panel de gestión -->
+  <div id="panel-guardado">
+    <button id="btn-guardar">Guardar Crucigrama Resuelto</button>
+    <select id="select-guardados">
+      <option value="">-- Cargar crucigrama resuelto --</option>
+    </select>
+    <button id="btn-abrir-gestion">Gestionar Guardados</button>
+  </div>
+
+  <!-- Panel flotante / Modal de gestión -->
+  <div id="modal-gestion" class="modal" style="display: none;">
+    <div class="modal-contenido">
+      <h3>Gestionar Crucigramas Guardados</h3>
+      <div id="lista-gestion"></div>
+      <button id="btn-cerrar-gestion">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Tablero -->
+  <div id="tablero-crucigrama"></div>
+
+  <!-- Contenedor de definiciones -->
+  <div id="contenedor-definiciones">
+    <h2>Definiciones</h2>
+    <div class="columnas-definiciones">
+      <div id="definiciones-horizontales">
+        <h3>Horizontales</h3>
+        <div class="lista" id="lista-horizontales"></div>
+      </div>
+      <div id="definiciones-verticales">
+        <h3>Verticales</h3>
+        <div class="lista" id="lista-verticales"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
