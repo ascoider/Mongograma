@@ -17,6 +17,10 @@ for (let f = 0; f < filas; f++) {
   for (let c = 0; c < columnas; c++) {
     const input = document.createElement("input");
     input.type = "text";
+    input.setAttribute("inputmode", "text"); // Pide el teclado alfabético estándar
+    input.setAttribute("autocomplete", "off"); // Desactiva autocompletados molestos
+    input.setAttribute("autocorrect", "off");
+    input.setAttribute("autocapitalize", "characters"); // Fuerza mayúsculas directamente
     input.maxLength = 1;
     input.classList.add("casilla");
     tablero[f][c] = input;

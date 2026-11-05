@@ -95,22 +95,30 @@ button {
   width: 100%;
 }
 
+:root {
+  --tamano-casilla: 42px; /* Súbelo a 45px o 48px si lo quieres más grande de base */
+}
+
 #tablero-crucigrama {
   display: inline-grid;
-  grid-template-columns: repeat(12, 40px);
-  border: 3px solid #000000;
-  background-color: #000000;
+  grid-template-columns: repeat(12, var(--tamano-casilla));
+  grid-template-rows: repeat(12, var(--tamano-casilla));
+  background-color: #000000; /* Este fondo negro actúa como las líneas de la cuadrícula */
+  border: 4px solid #000000;
+  gap: 2px; /* Líneas perfectamente uniformes de 1px en horizontal y vertical */
   margin-top: 10px;
 }
 
 .casilla {
   box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border: 1px solid #333333;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border: none; /* Sin bordes propios para evitar que desaparezcan */
+  margin: 0;
+  padding: 0;
   text-align: center;
-  font-size: 20px;
+  font-size: calc(var(--tamano-casilla) * 0.55);
   font-weight: bold;
   text-transform: uppercase;
   outline: none;
@@ -131,8 +139,7 @@ button {
 }
 
 .casilla.bloqueada {
-  background-color: #222222;
-  border-color: #222222;
+  background-color: #000000;
 }
 
 #contenedor-definiciones {
