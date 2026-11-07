@@ -113,7 +113,7 @@ button {
   grid-template-rows: var(--tamano-casilla) repeat(12, var(--tamano-casilla));
   background-color: transparent;
   gap: 0; 
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .esquina-vacia {
@@ -184,11 +184,16 @@ button {
   background-color: #000000;
 }
 
+/* Estilo para las casillas con letras incorrectas tras la comprobación */
+.casilla-incorrecta {
+  background-color: #ff8787 !important; /* Rojo suave de alerta */
+}
+
 /* Panel de definición único ajustado al ancho exacto del tablero (13 columnas) */
 #texto-definicion-activa {
   width: calc(var(--tamano-casilla) * 13);
   max-width: 100%;
-  margin: 20px auto 0 auto;
+  margin: 0px auto 0 auto;
   text-align: left;
   box-sizing: border-box;
 }

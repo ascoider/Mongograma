@@ -8,6 +8,44 @@ let ultimaCasillaActiva = null;
 let definicionesCargadas = [];
 const tablero = [];
 
+// --- VARIABLES Y FUNCIONES DEL CRONÓMETRO (EN ÁMBITO GLOBAL) ---
+let segundosTotales = 0;
+let intervaloCronometro = null;
+let cronometroIniciado = false;
+
+function iniciarCronometro() {
+  if (!cronometroIniciado) {
+    cronometroIniciado = true;
+    intervaloCronometro = setInterval(() => {
+      segundosTotales++;
+      actualizarVisualizadorTiempo();
+    }, 1000);
+  }
+}
+
+function detenerCronometro() {
+  clearInterval(intervaloCronometro);
+  intervaloCronometro = null;
+}
+
+function reiniciarCronometro() {
+  detenerCronometro();
+  segundosTotales = 0;
+  cronometroIniciado = false;
+  actualizarVisualizadorTiempo();
+}
+
+function actualizarVisualizadorTiempo() {
+  const horas = String(Math.floor(segundosTotales / 3600)).padStart(2, '0');
+  const minutos = String(Math.floor((segundosTotales % 3600) / 60)).padStart(2, '0');
+  const segundos = String(segundosTotales % 60).padStart(2, '0');
+  
+  const relojEl = document.getElementById("cronometro");
+  if (relojEl) {
+    relojEl.textContent = `Tiempo: ${horas}:${minutos}:${segundos}`;
+  }
+}
+
 // Limpiar el contenedor por seguridad al iniciar
 if (contenedorMarco) {
   contenedorMarco.innerHTML = "";
@@ -41,7 +79,7 @@ if (contenedorMarco) {
 
       const input = document.createElement("input");
       input.type = "text";
-      input.setAttribute("inputmode", "latin"); // O "text" limpio sin barra de números extra
+      input.setAttribute("inputmode", "latin");
       input.setAttribute("autocomplete", "off");
       input.setAttribute("autocorrect", "off");
       input.setAttribute("autocapitalize", "characters");
@@ -57,8 +95,14 @@ if (contenedorMarco) {
 
       input.addEventListener("contextmenu", (e) => e.preventDefault());
 
+      // --- DENTRO DE LA CREACIÓN DE CADA INPUT (en el bucle de casillas) ---
       input.addEventListener("click", () => {
         if (input.classList.contains("bloqueada")) return;
+
+        // Si la celda estaba marcada en rojo por error, al hacer clic se le quita
+        input.classList.remove("casilla-incorrecta");
+
+        iniciarCronometro(); 
 
         if (ultimaCasillaActiva === input) {
           direccionHorizontal = !direccionHorizontal;
@@ -73,12 +117,17 @@ if (contenedorMarco) {
       input.addEventListener("focus", () => {
         if (input.classList.contains("bloqueada")) {
           input.blur();
-          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
           limpiarSeleccionYDefinicion();
           return;
         }
+        
+        // Si la celda estaba marcada en rojo por error, al enfocar se le quita
+        input.classList.remove("casilla-incorrecta");
+
+        iniciarCronometro(); 
         seleccionarTexto();
         actualizarResaltadoYDefinicion(f, c);
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
 
       input.addEventListener("input", () => {
@@ -90,6 +139,8 @@ if (contenedorMarco) {
           ultimaCasillaActiva = null;
           avanzarSiguienteCasilla(f, c);
         }
+        
+        verificarSiEstaCompletoYCorrecto();
       });
 
       input.addEventListener('keydown', (e) => {
@@ -134,7 +185,6 @@ document.addEventListener("click", (e) => {
 
 // Actualizar resaltado de palabra y mostrar definición limpia
 function actualizarResaltadoYDefinicion(f, c) {
-  // Limpiar resaltados previos
   for (let row = 0; row < filas; row++) {
     for (let col = 0; col < columnas; col++) {
       const inp = tablero[row][col];
@@ -154,7 +204,6 @@ function actualizarResaltadoYDefinicion(f, c) {
     );
   }
 
-  // Resaltar las casillas de la palabra encontrada
   if (palabraEncontrada) {
     for (let i = 0; i < palabraEncontrada.longitud; i++) {
       let rf = palabraEncontrada.orientacion === 'horizontal' ? palabraEncontrada.fila : palabraEncontrada.fila + i;
@@ -171,7 +220,6 @@ function actualizarResaltadoYDefinicion(f, c) {
     }
   }
 
-  // Mostrar la definición con el formato limpio solicitado ("1 - Horizontal")
   if (palabraEncontrada && textoDefinicionActiva) {
     const sentido = direccionHorizontal ? "Horizontal" : "Vertical";
     textoDefinicionActiva.innerHTML = `
@@ -210,6 +258,86 @@ function retrocederCasillaAnterior(f, c) {
   }
 }
 
+// --- VALIDACIÓN DE VICTORIA Y MARCADO DE ERRORES ---
+function comprobarConSolucionReal() {
+  let esTodoCorrecto = true;
+
+  // Limpiamos marcas de error anteriores en todo el tablero
+  for (let f = 0; f < filas; f++) {
+    for (let c = 0; c < columnas; c++) {
+      if (tablero[f][c]) tablero[f][c].classList.remove("casilla-incorrecta");
+    }
+  }
+
+  // Comparamos palabra por palabra y letra por letra
+  for (let p of definicionesCargadas) {
+    let palabraEscrita = "";
+    let indicesPalabra = [];
+    
+    for (let i = 0; i < p.longitud; i++) {
+      let rf = p.orientacion === 'horizontal' ? p.fila : p.fila + i;
+      let rc = p.orientacion === 'horizontal' ? p.col + i : p.col;
+      indicesPalabra.push({ f: rf, c: rc });
+      palabraEscrita += (tablero[rf][rc].value || "").toUpperCase().trim();
+    }
+    
+    const solucionReal = p.solucion ? p.solucion.toUpperCase().trim() : "";
+
+    // Verificar letra por letra para marcar individualmente las incorrectas
+    for (let i = 0; i < p.longitud; i++) {
+      let letraEscrita = palabraEscrita[i] || "";
+      let letraReal = solucionReal[i] || "";
+      
+      if (letraEscrita !== letraReal) {
+        esTodoCorrecto = false;
+        // Colorear de rojo la celda exacta que falló
+        tablero[indicesPalabra[i].f][indicesPalabra[i].c].classList.add("casilla-incorrecta");
+      }
+    }
+  }
+
+  return esTodoCorrecto;
+}
+
+function verificarSiEstaCompletoYCorrecto() {
+  let todoRelleno = true;
+
+  for (let f = 0; f < filas; f++) {
+    for (let c = 0; c < columnas; c++) {
+      const input = tablero[f][c];
+      if (!input.classList.contains("bloqueada")) {
+        if (input.value.trim() === "") {
+          todoRelleno = false;
+        }
+      }
+    }
+  }
+
+  if (todoRelleno) {
+    const esCorrecto = comprobarConSolucionReal();
+    if (esCorrecto) {
+      detenerCronometro();
+      alert(`¡Enhorabuena! Has completado el crucigrama correctamente en ${document.getElementById("cronometro").textContent}`);
+    }
+  }
+}
+
+// --- FUNCIÓN EXTRA DE DEBUG (TECLA 1) ---
+document.addEventListener("keydown", (e) => {
+  if (e.key === "1") {
+    for (let f = 0; f < filas; f++) {
+      for (let c = 0; c < columnas; c++) {
+        const input = tablero[f][c];
+        if (input && !input.classList.contains("bloqueada")) {
+          input.value = "T";
+        }
+      }
+    }
+    verificarSiEstaCompletoYCorrecto();
+    console.log("Modo Debug: Tablero rellenado con 'T' para testear.");
+  }
+});
+
 // Cargar el crucigrama inicial leyendo el formato plano por índice del JSON
 function cargarCrucigramaInicial() {
   fetch("solutions/crucigrama001.json")
@@ -243,6 +371,7 @@ function cargarCrucigramaInicial() {
       }
 
       definicionesCargadas = datosGuardados.definiciones || [];
+      reiniciarCronometro(); // Reinicia el tiempo al cargar un nuevo crucigrama
     })
     .catch(error => {
       console.error("Error al cargar el crucigrama:", error);
