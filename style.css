@@ -3,6 +3,7 @@ body {
   background-color: #f4f4f4;
   text-align: center;
   padding: 20px;
+  padding-bottom: 250px !important; /* Espacio extra para que el teclado móvil no tape contenido */
 }
 
 #panel-guardado {
@@ -111,22 +112,12 @@ button {
   grid-template-columns: var(--tamano-casilla) repeat(12, var(--tamano-casilla));
   grid-template-rows: var(--tamano-casilla) repeat(12, var(--tamano-casilla));
   background-color: transparent;
-  gap: 0; /* Sin espacios generales para evitar líneas extrañas */
+  gap: 0; 
   margin-top: 10px;
 }
 
 .esquina-vacia {
   background-color: transparent;
-}
-
-/* Contenedor para los números de arriba */
-.referencias-fila {
-  display: contents;
-}
-
-/* Contenedor para los números de la izquierda */
-.referencias-columna {
-  display: contents;
 }
 
 /* Estilo de los números de referencia (flotantes, sin líneas ni recuadros) */
@@ -140,18 +131,13 @@ button {
   background-color: transparent;
 }
 
-/* El tablero interno dibuja sus líneas únicamente en la zona de juego */
-.tablero-interno {
-  display: contents;
-}
-
 /* Las celdas del tablero usan un fondo negro en el contenedor o bordes individuales para las líneas */
 .celda-contenedor {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #000000; /* Esto crea las líneas negras de separación solo entre casillas */
-  padding: 1px; /* Grosor de la línea del tablero */
+  background-color: #000000; 
+  padding: 1px; 
   box-sizing: border-box;
 }
 
@@ -187,50 +173,32 @@ button {
 
 /* Estilos para el resaltado suave de la palabra completa */
 .celda-resaltada {
-  background-color: #f0f8ff !important; /* Tono suave menos saturado para el resto de la palabra */
+  background-color: #f0f8ff !important; 
 }
 
 .celda-activa-palabra {
-  background-color: #d0ebff !important; /* Casilla actual dentro de la palabra seleccionada */
+  background-color: #d0ebff !important; 
 }
 
 .casilla.bloqueada {
   background-color: #000000;
 }
 
-/* Panel de definiciones ajustado exactamente al ancho del crucigrama (13 columnas * tamaño) */
-#contenedor-definiciones,
+/* Panel de definición único ajustado al ancho exacto del tablero (13 columnas) */
 #texto-definicion-activa {
   width: calc(var(--tamano-casilla) * 13);
   max-width: 100%;
   margin: 20px auto 0 auto;
   text-align: left;
-  background: white;
-  padding: 15px 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   box-sizing: border-box;
 }
 
-#contenedor-definicion-activa {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
+/* Estilo de la tarjeta de definición activa */
 .definicion-activa {
-  background: white;
-  padding: 0;
-  border: none;
-  box-shadow: none;
   background-color: rgb(255, 246, 175);
-  /* border-left: 4px solid #fab005; */
-  padding-left: 10px;
+  padding: 12px 15px;
+  border-radius: 4px;
+  border-left: 4px solid #fab005;
   font-weight: normal;
-}
-
-/* Asegurar espacio extra al final de la página para que el móvil pueda hacer scroll al escribir abajo */
-body {
-  padding-bottom: 250px !important; /* Deja hueco artificial para que el teclado no tape el contenido */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }

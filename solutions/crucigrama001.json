@@ -586,7 +586,7 @@
       "col": 0,
       "longitud": 6,
       "solucion": "tapado",
-      "textoDefinicion": "En una competición, equipo no favorito pero con opciones de clasificar alto."
+      "textoDefinicion": "En una competición deportiva, equipo modesto con potencial para dar una sorpresa."
     },
     {
       "id": "H2",
@@ -596,7 +596,7 @@
       "col": 7,
       "longitud": 5,
       "solucion": "sarta",
-      "textoDefinicion": "h2"
+      "textoDefinicion": "Hay de mentiras, de perlas, de gilipolleces..."
     },
     {
       "id": "H3",
@@ -606,7 +606,7 @@
       "col": 0,
       "longitud": 9,
       "solucion": "anteojera",
-      "textoDefinicion": "h3"
+      "textoDefinicion": "<i><span style=color:blue;>singular<span></i> Piezas que limitan la visión periférica en animales de tiro."
     },
     {
       "id": "H4",
@@ -646,7 +646,7 @@
       "col": 7,
       "longitud": 5,
       "solucion": "tazad",
-      "textoDefinicion": "h7"
+      "textoDefinicion": "<i><span style=color:blue;>desuso<span></i> Estropead haciendo cortes o mordiendo."
     },
     {
       "id": "H8",
@@ -656,7 +656,7 @@
       "col": 0,
       "longitud": 8,
       "solucion": "icnologa",
-      "textoDefinicion": "h8"
+      "textoDefinicion": "Científica especializada en rastros y huellas fosiles."
     },
     {
       "id": "H9",
@@ -676,7 +676,7 @@
       "col": 0,
       "longitud": 7,
       "solucion": "desease",
-      "textoDefinicion": "h10"
+      "textoDefinicion": "Anhelase con vehemencia."
     },
     {
       "id": "H11",
@@ -686,7 +686,7 @@
       "col": 8,
       "longitud": 4,
       "solucion": "omis",
-      "textoDefinicion": "h11"
+      "textoDefinicion": "Tan flojo y descuidado que ni llega al final."
     },
     {
       "id": "H12",
@@ -716,7 +716,7 @@
       "col": 6,
       "longitud": 6,
       "solucion": "rarboc",
-      "textoDefinicion": "h14"
+      "textoDefinicion": "Recibir un castigo corporal con la mano vuelta."
     },
     {
       "id": "H15",
@@ -796,7 +796,7 @@
       "col": 0,
       "longitud": 7,
       "solucion": "susidio",
-      "textoDefinicion": "h22"
+      "textoDefinicion": "Con una B extra, se convierte en una prestación pública."
     },
     {
       "id": "H23",
@@ -836,7 +836,7 @@
       "col": 7,
       "longitud": 5,
       "solucion": "acdov",
-      "textoDefinicion": "h26"
+      "textoDefinicion": "Un ruso en Nueva Zelanda empinando."
     },
     {
       "id": "H27",
@@ -876,7 +876,7 @@
       "col": 1,
       "longitud": 7,
       "solucion": "aniceto",
-      "textoDefinicion": "v2"
+      "textoDefinicion": "Que te meto."
     },
     {
       "id": "V3",
@@ -976,7 +976,7 @@
       "col": 5,
       "longitud": 6,
       "solucion": "doping",
-      "textoDefinicion": "v12"
+      "textoDefinicion": "Juanito pasó a ser Johann en 2002 al recurrir a esto."
     },
     {
       "id": "V13",
@@ -1046,7 +1046,7 @@
       "col": 8,
       "longitud": 3,
       "solucion": "aaa",
-      "textoDefinicion": "v19"
+      "textoDefinicion": "Este modelo a veces se sulfata."
     },
     {
       "id": "V20",
@@ -1106,7 +1106,7 @@
       "col": 10,
       "longitud": 5,
       "solucion": "aeiou",
-      "textoDefinicion": "v25"
+      "textoDefinicion": "Compro todas y resuelvo."
     },
     {
       "id": "V26",
