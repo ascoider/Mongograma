@@ -95,13 +95,10 @@ if (contenedorMarco) {
 
       input.addEventListener("contextmenu", (e) => e.preventDefault());
 
-      // --- DENTRO DE LA CREACIÓN DE CADA INPUT (en el bucle de casillas) ---
       input.addEventListener("click", () => {
         if (input.classList.contains("bloqueada")) return;
 
-        // Si la celda estaba marcada en rojo por error, al hacer clic se le quita
         input.classList.remove("casilla-incorrecta");
-
         iniciarCronometro(); 
 
         if (ultimaCasillaActiva === input) {
@@ -112,6 +109,11 @@ if (contenedorMarco) {
 
         seleccionarTexto();
         actualizarResaltadoYDefinicion(f, c);
+        
+        // Scroll optimizado para Android al hacer clic
+        setTimeout(() => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
       });
 
       input.addEventListener("focus", () => {
@@ -121,13 +123,15 @@ if (contenedorMarco) {
           return;
         }
         
-        // Si la celda estaba marcada en rojo por error, al enfocar se le quita
         input.classList.remove("casilla-incorrecta");
-
         iniciarCronometro(); 
         seleccionarTexto();
         actualizarResaltadoYDefinicion(f, c);
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Scroll optimizado para Android al enfocar
+        setTimeout(() => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
       });
 
       input.addEventListener("input", () => {
