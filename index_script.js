@@ -4,7 +4,7 @@ const contenedorMarco = document.getElementById("contenedor-marco");
 const textoDefinicionActiva = document.getElementById("texto-definicion-activa");
 const divTeclado = document.getElementById("teclado-virtual");
 
-let direccionHorizontal = true;
+let direccionHorizontal = true; // Por defecto horizontal
 let ultimaCasillaActiva = null;
 let celdaActiva = null;
 let definicionesCargadas = [];
@@ -87,7 +87,6 @@ function construirTecladoVirtual() {
         boton.classList.add("tecla-especial");
       }
 
-      // Evitamos pérdida de enfoque y aseguramos respuesta táctil fluida en Android
       boton.addEventListener("touchstart", (e) => {
         e.preventDefault();
         manejarPulsacionTeclaVirtual(simbolo);
@@ -195,10 +194,14 @@ if (contenedorMarco) {
         iniciarCronometro(); 
         mostrarTecladoVirtual();
 
+        // Lógica de orientación solicitada:
+        // - Si se pulsa la misma casilla, cambia de sentido (horizontal <-> vertical).
+        // - Si es una casilla diferente, mantiene el sentido actual sin alterarlo.
         if (ultimaCasillaActiva === input) {
           direccionHorizontal = !direccionHorizontal;
         } else {
           ultimaCasillaActiva = input;
+          // Nota: al pulsar una casilla diferente, no modificamos 'direccionHorizontal', por lo que mantiene el sentido actual.
         }
 
         seleccionarTexto();
@@ -439,6 +442,10 @@ function cargarCrucigramaInicial() {
       definicionesCargadas = datosGuardados.definiciones || [];
       reiniciarCronometro();
       ocultarTecladoVirtual();
+      
+      // Restablecer valores iniciales de selección al cargar el crucigrama
+      direccionHorizontal = true;
+      ultimaCasillaActiva = null;
       celdaActiva = null;
     })
     .catch(error => {
