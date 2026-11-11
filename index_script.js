@@ -180,7 +180,7 @@ if (contenedorMarco) {
       tablero[f][c] = input;
       contenedorCelda.appendChild(input);
 
-      // Desactivar menús y barras de selección de texto en Android
+      // Bloquear menús y eventos de selección de texto en Android
       input.addEventListener("contextmenu", (e) => e.preventDefault());
       input.addEventListener("select", (e) => e.preventDefault());
       input.addEventListener("selectstart", (e) => e.preventDefault());
@@ -204,7 +204,8 @@ if (contenedorMarco) {
         celdaActiva = input;
 
         input.focus();
-        setTimeout(() => input.select(), 0);
+        // NOTA: Se ha eliminado completamente input.select() para evitar los tiradores azules en Android.
+
         actualizarResaltadoYDefinicion(f, c);
         
         setTimeout(() => {
@@ -342,7 +343,6 @@ function manejarAvanceTrasEscritura(f, c) {
           celdaActiva = casillaInicio;
 
           casillaInicio.focus();
-          setTimeout(() => casillaInicio.select(), 0);
           actualizarResaltadoYDefinicion(siguientePalabra.fila, siguientePalabra.col);
 
           setTimeout(() => {
