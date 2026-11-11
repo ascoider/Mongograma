@@ -176,11 +176,11 @@ if (contenedorMarco) {
       input.setAttribute("autocapitalize", "characters");
       input.maxLength = 1;
       input.classList.add("casilla");
+      input.readOnly = true; // <--- CLAVE: Solo lectura para evitar que Android muestre los tiradores de selección
       
       tablero[f][c] = input;
       contenedorCelda.appendChild(input);
 
-      // Bloquear menús y eventos de selección de texto en Android
       input.addEventListener("contextmenu", (e) => e.preventDefault());
       input.addEventListener("select", (e) => e.preventDefault());
       input.addEventListener("selectstart", (e) => e.preventDefault());
@@ -204,7 +204,6 @@ if (contenedorMarco) {
         celdaActiva = input;
 
         input.focus();
-        // NOTA: Se ha eliminado completamente input.select() para evitar los tiradores azules en Android.
 
         actualizarResaltadoYDefinicion(f, c);
         
@@ -483,11 +482,11 @@ function cargarCrucigramaInicial() {
             input.value = "";
             if (celdaDatos && celdaDatos.bloqueada) {
               input.classList.add("bloqueada");
-              input.readOnly = true;
             } else {
               input.classList.remove("bloqueada");
-              input.readOnly = false;
             }
+            // Mantenemos todas las celdas en readOnly por seguridad para que Android no active tiradores
+            input.readOnly = true;
           }
           index++;
         }
