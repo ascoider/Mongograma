@@ -4,9 +4,9 @@ const contenedorMarco = document.getElementById("contenedor-marco");
 const textoDefinicionActiva = document.getElementById("texto-definicion-activa");
 const divTeclado = document.getElementById("teclado-virtual");
 
-let direccionHorizontal = true; // Por defecto horizontal
-let ultimaCasillaActiva = null;
+let direccionHorizontal = true; // Por defecto siempre horizontal
 let celdaActiva = null;
+let ultimaCasillaClickada = null;
 let definicionesCargadas = [];
 const tablero = [];
 
@@ -136,7 +136,11 @@ function manejarPulsacionTeclaVirtual(simbolo) {
     }
   } else {
     celdaActiva.value = simbolo;
-    avanzarSiguienteCasilla(fActual, cActual);
+    
+    // 1. Avanzar casilla normal o saltar de palabra si se completó la actual
+    manejarAvanceTrasEscritura(fActual, cActual);
+
+    // 2. Comprobar si todo el crucigrama está completo y correcto
     verificarSiEstaCompletoYCorrecto();
   }
 }
@@ -180,40 +184,34 @@ if (contenedorMarco) {
       tablero[f][c] = input;
       contenedorCelda.appendChild(input);
 
-      const seleccionarTexto = () => {
-        setTimeout(() => input.select(), 0);
-      };
-
       input.addEventListener("contextmenu", (e) => e.preventDefault());
 
-      const activarCasilla = () => {
+      input.addEventListener("pointerdown", () => {
         if (input.classList.contains("bloqueada")) return;
 
-        celdaActiva = input;
         input.classList.remove("casilla-incorrecta");
         iniciarCronometro(); 
         mostrarTecladoVirtual();
 
-        // Lógica de orientación solicitada:
-        // - Si se pulsa la misma casilla, cambia de sentido (horizontal <-> vertical).
-        // - Si es una casilla diferente, mantiene el sentido actual sin alterarlo.
-        if (ultimaCasillaActiva === input) {
+        if (ultimaCasillaClickada === input) {
           direccionHorizontal = !direccionHorizontal;
         } else {
-          ultimaCasillaActiva = input;
-          // Nota: al pulsar una casilla diferente, no modificamos 'direccionHorizontal', por lo que mantiene el sentido actual.
+          if (ultimaCasillaClickada === null) {
+            direccionHorizontal = true;
+          }
         }
 
-        seleccionarTexto();
+        ultimaCasillaClickada = input;
+        celdaActiva = input;
+
+        input.focus();
+        setTimeout(() => input.select(), 0);
         actualizarResaltadoYDefinicion(f, c);
         
         setTimeout(() => {
           input.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 150);
-      };
-
-      input.addEventListener("click", activarCasilla);
-      input.addEventListener("focus", activarCasilla);
+      });
 
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace') {
@@ -250,7 +248,7 @@ document.addEventListener("click", (e) => {
       !e.target.classList.contains("referencia-borde") && 
       !e.target.closest("#teclado-virtual")) {
     limpiarSeleccionYDefinicion();
-    ultimaCasillaActiva = null;
+    ultimaCasillaClickada = null;
     celdaActiva = null;
     ocultarTecladoVirtual();
   }
@@ -305,6 +303,67 @@ function actualizarResaltadoYDefinicion(f, c) {
   }
 }
 
+// --- LÓGICA DE AVANCE Y SALTO AUTOMÁTICO DE PALABRA ---
+function manejarAvanceTrasEscritura(f, c) {
+  // 1. Identificar la palabra actual en la que estamos escribiendo
+  let palabraActual = null;
+  if (direccionHorizontal) {
+    palabraActual = definicionesCargadas.find(p => 
+      p.orientacion === 'horizontal' && p.fila === f && c >= p.col && c < p.col + p.longitud
+    );
+  } else {
+    palabraActual = definicionesCargadas.find(p => 
+      p.orientacion === 'vertical' && p.col === c && f >= p.fila && f < p.fila + p.longitud
+    );
+  }
+
+  if (palabraActual) {
+    // Verificar si todas las casillas de la palabra actual están llenas
+    let palabraCompleta = true;
+    for (let i = 0; i < palabraActual.longitud; i++) {
+      let rf = palabraActual.orientacion === 'horizontal' ? palabraActual.fila : palabraActual.fila + i;
+      let rc = palabraActual.orientacion === 'horizontal' ? palabraActual.col + i : palabraActual.col;
+      if (!tablero[rf][rc].value || tablero[rf][rc].value.trim() === "") {
+        palabraCompleta = false;
+        break;
+      }
+    }
+
+    if (palabraCompleta) {
+      // Buscar la siguiente palabra (num + 1) en las definiciones cargadas
+      let siguienteNum = palabraActual.num + 1;
+      let siguientePalabra = definicionesCargadas.find(p => p.num === siguienteNum);
+
+      // Si no existe la palabra con num+1 (por ejemplo, pasamos de la última), buscamos la primera (num 1) o la siguiente disponible
+      if (!siguientePalabra && definicionesCargadas.length > 0) {
+        siguientePalabra = definicionesCargadas[0]; 
+      }
+
+      if (siguientePalabra) {
+        // Simular clic/enfoque en la casilla inicial de la siguiente palabra respetando su orientación
+        let casillaInicio = tablero[siguientePalabra.fila][siguientePalabra.col];
+        if (casillaInicio) {
+          direccionHorizontal = (siguientePalabra.orientacion === 'horizontal');
+          ultimaCasillaClickada = casillaInicio;
+          celdaActiva = casillaInicio;
+
+          casillaInicio.focus();
+          setTimeout(() => casillaInicio.select(), 0);
+          actualizarResaltadoYDefinicion(siguientePalabra.fila, siguientePalabra.col);
+
+          setTimeout(() => {
+            casillaInicio.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+          return;
+        }
+      }
+    }
+  }
+
+  // Si la palabra no está completa, avanzar a la siguiente casilla de manera normal
+  avanzarSiguienteCasilla(f, c);
+}
+
 function avanzarSiguienteCasilla(f, c) {
   let siguienteF = f;
   let siguienteC = c;
@@ -314,6 +373,7 @@ function avanzarSiguienteCasilla(f, c) {
     if (siguienteInput && !siguienteInput.classList.contains("bloqueada")) {
       siguienteInput.focus();
       celdaActiva = siguienteInput;
+      ultimaCasillaClickada = siguienteInput;
     }
   }
 }
@@ -328,6 +388,7 @@ function retrocederCasillaAnterior(f, c) {
       anteriorInput.value = '';
       anteriorInput.focus();
       celdaActiva = anteriorInput;
+      ultimaCasillaClickada = anteriorInput;
     }
   }
 }
@@ -443,9 +504,9 @@ function cargarCrucigramaInicial() {
       reiniciarCronometro();
       ocultarTecladoVirtual();
       
-      // Restablecer valores iniciales de selección al cargar el crucigrama
+      // Restablecer valores iniciales limpios
       direccionHorizontal = true;
-      ultimaCasillaActiva = null;
+      ultimaCasillaClickada = null;
       celdaActiva = null;
     })
     .catch(error => {
