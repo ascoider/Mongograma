@@ -6,27 +6,26 @@ const divTeclado = document.getElementById("teclado-virtual");
 
 let direccionHorizontal = true;
 let ultimaCasillaActiva = null;
-let celdaActiva = null; // Referencia fija a la casilla seleccionada actualmente
+let celdaActiva = null;
 let definicionesCargadas = [];
 const tablero = [];
 
 // --- CONFIGURACIÓN DE VARIABLES PÚBLICAS DEL TECLADO VIRTUAL ---
 const CONFIG_TECLADO = {
-  alturaFila: "48px",        // Altura de las filas de teclas
-  colorTeclaBg: "#ffffff",   // Color de fondo de las teclas
-  colorTeclaTexto: "#000000",// Color de las letras
-  colorBorde: "#333333",     // Color del borde de las teclas
-  colorPulsada: "#d0ebff"    // Color al pulsar una tecla
+  alturaFila: "48px",        
+  colorTeclaBg: "#ffffff",   
+  colorTeclaTexto: "#000000",
+  colorBorde: "#333333",     
+  colorPulsada: "#d0ebff"    
 };
 
-// Aplicar variables CSS configuradas para el teclado
 document.documentElement.style.setProperty('--teclado-altura', CONFIG_TECLADO.alturaFila);
 document.documentElement.style.setProperty('--tecla-bg', CONFIG_TECLADO.colorTeclaBg);
 document.documentElement.style.setProperty('--tecla-color', CONFIG_TECLADO.colorTeclaTexto);
 document.documentElement.style.setProperty('--tecla-borde', CONFIG_TECLADO.colorBorde);
 document.documentElement.style.setProperty('--tecla-pulsada', CONFIG_TECLADO.colorPulsada);
 
-// --- VARIABLES Y FUNCIONES DEL CRONÓMETRO (EN ÁMBITO GLOBAL) ---
+// --- CRONÓMETRO ---
 let segundosTotales = 0;
 let intervaloCronometro = null;
 let cronometroIniciado = false;
@@ -64,7 +63,7 @@ function actualizarVisualizadorTiempo() {
   }
 }
 
-// --- CONSTRUCCIÓN DEL TECLADO VIRTUAL PROPIETARIO ---
+// --- CONSTRUCCIÓN DEL TECLADO VIRTUAL ---
 function construirTecladoVirtual() {
   if (!divTeclado) return;
   divTeclado.innerHTML = "";
@@ -88,12 +87,14 @@ function construirTecladoVirtual() {
         boton.classList.add("tecla-especial");
       }
 
-      // Evitamos que el botón robe el foco de la celda al hacer mousedown/touchstart
-      boton.addEventListener("mousedown", (e) => e.preventDefault());
-      boton.addEventListener("touchstart", (e) => e.preventDefault());
+      // Evitamos pérdida de enfoque y aseguramos respuesta táctil fluida en Android
+      boton.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        manejarPulsacionTeclaVirtual(simbolo);
+      }, { passive: false });
 
       boton.addEventListener("click", (e) => {
-        e.stopPropagation();
+        e.preventDefault();
         manejarPulsacionTeclaVirtual(simbolo);
       });
 
@@ -141,16 +142,14 @@ function manejarPulsacionTeclaVirtual(simbolo) {
   }
 }
 
-// Limpiar el contenedor por seguridad al iniciar
+// --- CREACIÓN DEL TABLERO ---
 if (contenedorMarco) {
   contenedorMarco.innerHTML = "";
 
-  // 0. Esquina superior izquierda vacía
   const esquinaVacia = document.createElement("div");
   esquinaVacia.classList.add("referencia-borde");
   contenedorMarco.appendChild(esquinaVacia);
 
-  // 1. Números de la cabecera superior (1 al 12)
   for (let c = 0; c < columnas; c++) {
     const refCol = document.createElement("div");
     refCol.classList.add("referencia-borde");
@@ -158,11 +157,9 @@ if (contenedorMarco) {
     contenedorMarco.appendChild(refCol);
   }
 
-  // 2. Construir filas con su número lateral izquierdo y las casillas del tablero
   for (let f = 0; f < filas; f++) {
     tablero[f] = [];
 
-    // Número lateral izquierdo (1 al 12)
     const refFila = document.createElement("div");
     refFila.classList.add("referencia-borde");
     refFila.textContent = f + 1;
@@ -190,10 +187,10 @@ if (contenedorMarco) {
 
       input.addEventListener("contextmenu", (e) => e.preventDefault());
 
-      input.addEventListener("click", () => {
+      const activarCasilla = () => {
         if (input.classList.contains("bloqueada")) return;
 
-        celdaActiva = input; // Guardamos la celda activa actual
+        celdaActiva = input;
         input.classList.remove("casilla-incorrecta");
         iniciarCronometro(); 
         mostrarTecladoVirtual();
@@ -210,39 +207,10 @@ if (contenedorMarco) {
         setTimeout(() => {
           input.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 150);
-      });
+      };
 
-      input.addEventListener("focus", () => {
-        if (input.classList.contains("bloqueada")) {
-          input.blur();
-          limpiarSeleccionYDefinicion();
-          return;
-        }
-        
-        celdaActiva = input; // Guardamos la celda activa actual
-        input.classList.remove("casilla-incorrecta");
-        iniciarCronometro(); 
-        mostrarTecladoVirtual();
-        seleccionarTexto();
-        actualizarResaltadoYDefinicion(f, c);
-        
-        setTimeout(() => {
-          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 150);
-      });
-
-      input.addEventListener("input", () => {
-        if (input.value.length > 1) {
-          input.value = input.value.slice(-1);
-        }
-
-        if (input.value.length === 1) {
-          ultimaCasillaActiva = null;
-          avanzarSiguienteCasilla(f, c);
-        }
-        
-        verificarSiEstaCompletoYCorrecto();
-      });
+      input.addEventListener("click", activarCasilla);
+      input.addEventListener("focus", activarCasilla);
 
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace') {
@@ -260,7 +228,6 @@ if (contenedorMarco) {
   }
 }
 
-// Limpiar resaltados y dejar el recuadro de definición completamente vacío
 function limpiarSeleccionYDefinicion() {
   for (let f = 0; f < filas; f++) {
     for (let c = 0; c < columnas; c++) {
@@ -275,7 +242,6 @@ function limpiarSeleccionYDefinicion() {
   }
 }
 
-// Detectar clics fuera del crucigrama y del teclado para limpiar y ocultarlo
 document.addEventListener("click", (e) => {
   if (!e.target.classList.contains("casilla") && 
       !e.target.classList.contains("referencia-borde") && 
@@ -287,7 +253,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Actualizar resaltado de palabra y mostrar definición limpia
 function actualizarResaltadoYDefinicion(f, c) {
   for (let row = 0; row < filas; row++) {
     for (let col = 0; col < columnas; col++) {
@@ -345,7 +310,7 @@ function avanzarSiguienteCasilla(f, c) {
     const siguienteInput = tablero[siguienteF][siguienteC];
     if (siguienteInput && !siguienteInput.classList.contains("bloqueada")) {
       siguienteInput.focus();
-      celdaActiva = siguienteInput; // Actualizamos la celda activa al avanzar
+      celdaActiva = siguienteInput;
     }
   }
 }
@@ -359,12 +324,12 @@ function retrocederCasillaAnterior(f, c) {
     if (anteriorInput && !anteriorInput.classList.contains("bloqueada")) {
       anteriorInput.value = '';
       anteriorInput.focus();
-      celdaActiva = anteriorInput; // Actualizamos la celda activa al retroceder
+      celdaActiva = anteriorInput;
     }
   }
 }
 
-// --- VALIDACIÓN DE VICTORIA Y MARCADO DE ERRORES ---
+// --- VALIDACIÓN DE VICTORIA ---
 function comprobarConSolucionReal() {
   let esTodoCorrecto = true;
 
@@ -425,7 +390,7 @@ function verificarSiEstaCompletoYCorrecto() {
   }
 }
 
-// --- FUNCIÓN EXTRA DE DEBUG (TECLA 1) ---
+// --- DEBUG (TECLA 1) ---
 document.addEventListener("keydown", (e) => {
   if (e.key === "1") {
     for (let f = 0; f < filas; f++) {
@@ -437,11 +402,9 @@ document.addEventListener("keydown", (e) => {
       }
     }
     verificarSiEstaCompletoYCorrecto();
-    console.log("Modo Debug: Tablero rellenado con 'T' para testear.");
   }
 });
 
-// Cargar el crucigrama inicial leyendo el formato plano por índice del JSON
 function cargarCrucigramaInicial() {
   fetch("solutions/crucigrama001.json")
     .then(response => {
@@ -480,10 +443,8 @@ function cargarCrucigramaInicial() {
     })
     .catch(error => {
       console.error("Error al cargar el crucigrama:", error);
-      alert("Hubo un error al cargar el crucigrama inicial: " + error.message);
     });
 }
 
-// Inicialización general al arrancar
 construirTecladoVirtual();
 cargarCrucigramaInicial();

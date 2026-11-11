@@ -208,57 +208,61 @@ button {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Contenedor principal del teclado virtual flotante o fijo abajo */
+
+/* Contenedor principal del teclado virtual flotante */
 .teclado-contenedor {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  max-width: 100vw;
   background-color: var(--teclado-bg, #222);
   box-sizing: border-box;
-  padding: 8px 4px;
+  padding: 6px 2px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+  overflow-x: hidden;
 }
 
-/* Fila de teclas */
+/* Fila de teclas adaptada al 100% */
 .teclado-fila {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   width: 100%;
+  box-sizing: border-box;
+  padding: 0 2px;
 }
 
-/* Estilo base de cada tecla */
+/* Estilo base de cada tecla (flex-grow para repartir el espacio de la pantalla) */
 .tecla {
   flex: 1;
   height: var(--teclado-altura, 45px);
-  max-width: 40px; /* Para que no se estiren demasiado en tablets */
+  min-width: 0; /* Vital para que flexbox comprima las teclas si no caben */
   background-color: var(--tecla-bg, #ffffff);
   color: var(--tecla-color, #000000);
   border: 1px solid var(--tecla-borde, #cccccc);
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.1s ease;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Tecla especial de borrar más ancha */
+/* Tecla especial de borrar */
 .tecla-especial {
   flex: 1.5;
-  max-width: 60px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Efecto sencillo al pulsar la tecla (resaltado) */
 .tecla:active, .tecla.pulsada {
   background-color: var(--tecla-pulsada, #b2f2bb) !important;
 }
