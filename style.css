@@ -266,3 +266,13 @@ button {
 .tecla:active, .tecla.pulsada {
   background-color: var(--tecla-pulsada, #b2f2bb) !important;
 }
+
+
+.casilla {
+  /* Evita que aparezcan los tiradores de selección de texto en móviles */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; /* Desactiva el menú contextual flotante en iOS/Android */
+}

@@ -136,11 +136,7 @@ function manejarPulsacionTeclaVirtual(simbolo) {
     }
   } else {
     celdaActiva.value = simbolo;
-    
-    // 1. Avanzar casilla normal o saltar de palabra si se completó la actual
     manejarAvanceTrasEscritura(fActual, cActual);
-
-    // 2. Comprobar si todo el crucigrama está completo y correcto
     verificarSiEstaCompletoYCorrecto();
   }
 }
@@ -184,7 +180,10 @@ if (contenedorMarco) {
       tablero[f][c] = input;
       contenedorCelda.appendChild(input);
 
+      // Desactivar menús y barras de selección de texto en Android
       input.addEventListener("contextmenu", (e) => e.preventDefault());
+      input.addEventListener("select", (e) => e.preventDefault());
+      input.addEventListener("selectstart", (e) => e.preventDefault());
 
       input.addEventListener("pointerdown", () => {
         if (input.classList.contains("bloqueada")) return;
@@ -305,7 +304,6 @@ function actualizarResaltadoYDefinicion(f, c) {
 
 // --- LÓGICA DE AVANCE Y SALTO AUTOMÁTICO DE PALABRA ---
 function manejarAvanceTrasEscritura(f, c) {
-  // 1. Identificar la palabra actual en la que estamos escribiendo
   let palabraActual = null;
   if (direccionHorizontal) {
     palabraActual = definicionesCargadas.find(p => 
@@ -318,7 +316,6 @@ function manejarAvanceTrasEscritura(f, c) {
   }
 
   if (palabraActual) {
-    // Verificar si todas las casillas de la palabra actual están llenas
     let palabraCompleta = true;
     for (let i = 0; i < palabraActual.longitud; i++) {
       let rf = palabraActual.orientacion === 'horizontal' ? palabraActual.fila : palabraActual.fila + i;
@@ -330,17 +327,14 @@ function manejarAvanceTrasEscritura(f, c) {
     }
 
     if (palabraCompleta) {
-      // Buscar la siguiente palabra (num + 1) en las definiciones cargadas
       let siguienteNum = palabraActual.num + 1;
       let siguientePalabra = definicionesCargadas.find(p => p.num === siguienteNum);
 
-      // Si no existe la palabra con num+1 (por ejemplo, pasamos de la última), buscamos la primera (num 1) o la siguiente disponible
       if (!siguientePalabra && definicionesCargadas.length > 0) {
         siguientePalabra = definicionesCargadas[0]; 
       }
 
       if (siguientePalabra) {
-        // Simular clic/enfoque en la casilla inicial de la siguiente palabra respetando su orientación
         let casillaInicio = tablero[siguientePalabra.fila][siguientePalabra.col];
         if (casillaInicio) {
           direccionHorizontal = (siguientePalabra.orientacion === 'horizontal');
@@ -360,7 +354,6 @@ function manejarAvanceTrasEscritura(f, c) {
     }
   }
 
-  // Si la palabra no está completa, avanzar a la siguiente casilla de manera normal
   avanzarSiguienteCasilla(f, c);
 }
 
@@ -504,7 +497,6 @@ function cargarCrucigramaInicial() {
       reiniciarCronometro();
       ocultarTecladoVirtual();
       
-      // Restablecer valores iniciales limpios
       direccionHorizontal = true;
       ultimaCasillaClickada = null;
       celdaActiva = null;
